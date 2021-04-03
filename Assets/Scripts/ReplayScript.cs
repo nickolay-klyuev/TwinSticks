@@ -8,17 +8,26 @@ public class ReplayScript : MonoBehaviour
     private KeyFrame[] keyFrames = new KeyFrame[bufferFrames];
 
     private Rigidbody rigidBody;
+    private GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
+        gameManager = GameManager.FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Record();
+        if (gameManager.recording)
+        {
+            Record();
+        }
+        else
+        {
+            PlayBack();
+        }
     }
 
     void PlayBack()
